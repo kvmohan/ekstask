@@ -49,15 +49,15 @@ nodeGroups:
 eksctl create cluster -f cluster.yml
 ```
 
-![](2.png)
+![](images/2.png)
 
-![](84.png)
+![](images/84.png)
 
-![](vn.png)
+![](images/vn.png)
 
-![](vf.png)
+![](images/vf.png)
 
-![](gr.png)
+![](images/gr.png)
 
 * Here there are 2 node groups and in 1st node group we have desired 2 nodes and in 2nd we have spot instances that is it launches when oad increase, we have given min and max size if instance so it launches the min number f nodes first.
 
@@ -71,23 +71,23 @@ eksctl create cluster -f cluster.yml
 aws eks update-kubeconfig --name saracluster
 ```
 
-![](4.png)
+![](images/4.png)
 
-![](fr.png)
+![](images/fr.png)
 
 ### Step 3: Create the new namespace as it is used to keep our work in different room and easy to maintain.
 
 ```
 kubectl create ns sarans
 ```
-![](r.png)
+![](images/r.png)
 
 * Update the default namespace.
 
 ```
 kubectl config set-context --current --namespace=sarans
 ```
-![](aq.png)
+![](images/aq.png)
 
 ### Step 4: Now we have to create the EFS first as we are using EFS instead of EBS storage:
 
@@ -95,7 +95,7 @@ kubectl config set-context --current --namespace=sarans
 
 * Important thing while creating, we have to create in the same VPC and in same subnets in which nodes are running so simply go and check the EC2 instances then select the desired one then create.
 
-![](ec2.png)
+![](images/cfg.png)
 
 ### Step 5: Now create the EFS provisioner as EFS use the provisioner:
 
@@ -138,7 +138,7 @@ spec:
             path: /
 ```
 
-![](q.png)
+![](images/q.png)
 
 * Here we have used the id and DNS server name of the filesystem we have created.
 
@@ -163,7 +163,7 @@ roleRef:
 
 ```
 
-![](m.png)
+![](images/m.png)
 
 ### Step 7: In this step we have created the storage class and 2 pvc one for WordPress and One for MySQL.
 
@@ -204,7 +204,7 @@ spec:
 
 ```
 
-![](k.png)
+![](images/k.png)
 
 ### Step 8: Now run our final app files first we have to create the secret file as we have used in our database:
 
@@ -212,7 +212,7 @@ spec:
 create secret generic mysql-pass --from-literal=password=saraplay
 ```
 
-![](jk.png)
+![](images/jk.png)
 
 * Now run the sql.yml file to create the sql pods and it will create in one of the nodes or cluster of kubernetes:
 
@@ -272,7 +272,7 @@ spec:
 
 ```
 
-![](cx.png)
+![](images/cx.png)
 
 * Next create the wordpress here i am using the joomla instead of wordpress:
 
@@ -335,19 +335,19 @@ spec:
 
 ```
 
-![](l,.png)
+![](images/l,.png)
 
 * After that see the pods.
 
-![](zx.png)
+![](images/zx.png)
 
 * Now run the kubectl get all command to get all the services from here we can also get the ip of the joomla and you can see that mysql doees'nt have any IP as it is launched in cluster IP.
 
-![](nvmc.png)
+![](images/nvmc.png)
 
 * Output: Copy the link and open in any browser:
 
-![](oc.png)
+![](images/oc.png)
 
 * Last if you want to delete the whole cluster then run this command:
 
@@ -355,7 +355,7 @@ spec:
 eksctl delete --region-ap-south-1 --name=saracluster
 ```
 
-![](ncc.png)
+![](images/ncc.png)
 
 * But EFS will deleted you have to it manually.
 
