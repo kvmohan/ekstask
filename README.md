@@ -357,7 +357,7 @@ eksctl delete --region-ap-south-1 --name=saracluster
 
 ![](images/ncc.png)
 
-* But EFS will deleted you have to it manually.
+* But EFS will not deleted you have to it manually.
 
 * Check the bill after this as EKS will charge and NAT gateway and EFS also.
 
